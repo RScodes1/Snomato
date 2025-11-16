@@ -20,7 +20,8 @@ async function sendEmail(email, username, password) {
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Password:</strong> ${password}</p>
       <br/>
-      <p>Login here: <a href="https://yourloginurl.com">Login Page</a></p>
+      <p>Login here: <a href="http://localhost:3000">Login Page</a></p>
+      <p>Login here: <a href="https://snomato-fe-git-main-rajasekhars-projects.vercel.app">Login Page</a></p>
     `,
   });
 }
