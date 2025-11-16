@@ -101,6 +101,7 @@ userRouter.get("/pending-users", auth, isAdmin, async (req, res) => {
 });
 
 userRouter.post("/login", async(req, res)=>{
+
     const {email, password} =req.body;
     try {
           const existingUser = await UserModel.findOne({email});
@@ -159,6 +160,10 @@ userRouter.get("/profile",  auth, async(req, res) => {
     res.status(500).json({ error: "Failed to fetch profile" });
   }
 })
+
+userRouter.get("/me", auth, async (req, res) => {
+  res.json({ user: req.user });
+});
 
 module.exports = {
     userRouter
