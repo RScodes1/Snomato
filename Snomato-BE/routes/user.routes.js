@@ -56,6 +56,8 @@ userRouter.post("/create-user/:pendingId", auth, isAdmin, async (req, res) => {
     } catch (emailErr) {
         // rollback
         await UserModel.deleteOne({ email });
+         pendingUser.status = "pending";
+           await pendingUser.save();
         console.error("Email failed:", emailErr);
         return res.status(500).json({ msg: "Failed to send email. Please try again." });
     }
