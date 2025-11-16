@@ -45,20 +45,17 @@ userRouter.post("/create-user/:pendingId", auth, isAdmin, async (req, res) => {
       password: hashed,
       role,
     });
-        pendingUser.status = "approved";
-           await pendingUser.save();
-     
+       
     try {
          // Mark pending request as approved
-        
+         pendingUser.status = "approved";
+           await pendingUser.save();
         await sendEmail(email, username, randomPassword);
         return res.json({ msg: "User created. Check your email." });
         
     } catch (emailErr) {
         // rollback
         await UserModel.deleteOne({ email });
-          pendingUser.status = "pending";
-          await pendingUser.save();
         console.error("Email failed:", emailErr);
         return res.status(500).json({ msg: "Failed to send email. Please try again." });
     }
