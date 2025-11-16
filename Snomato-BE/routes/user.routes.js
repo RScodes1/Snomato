@@ -159,7 +159,11 @@ userRouter.get("/profile",  auth, async(req, res) => {
 })
 
 userRouter.get("/me", auth, async (req, res) => {
-  res.json({ user: req.user });
+   const user = {
+     username : req.username,
+     role: req.role,
+   }
+  res.json({ user });
 });
 
 module.exports = {
