@@ -1,10 +1,9 @@
 require("dotenv").config();
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { UserModel } = require("./models/user.model");
-
+const { UserModel } = require("../models/user.model");
+const { connection } = require("../config/db");
 async function createAdmin() {
-  await mongoose.connect(process.env.MONGO_URL);
+  await connection;
 
   const existing = await UserModel.findOne({ role: "Admin" });
   if (existing) {
@@ -24,7 +23,7 @@ async function createAdmin() {
   await admin.save();
   console.log("Admin created successfully:", admin.email);
 
-  mongoose.disconnect();
+  connection.disconnnect();
 }
 
 createAdmin();
