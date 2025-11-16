@@ -100,7 +100,7 @@ userRouter.get("/pending-users", auth, isAdmin, async (req, res) => {
   res.json({ pending });
 });
 
-userRouter.post('/login', async(req, res)=>{
+userRouter.post("/login", async(req, res)=>{
     const {email, password} =req.body;
     try {
           const existingUser = await UserModel.findOne({email});
@@ -121,7 +121,7 @@ userRouter.post('/login', async(req, res)=>{
     }
 })
 
-userRouter.post('/logout', async(req,res) =>{
+userRouter.post("/logout", async(req,res) =>{
     try{
 
         const token =req.headers.authorization?.split(' ')[1];
@@ -138,7 +138,7 @@ userRouter.post('/logout', async(req,res) =>{
     }
 })
 
-userRouter.get('/profile',  auth, async(req, res) => {
+userRouter.get("/profile",  auth, async(req, res) => {
      try {
 
         const id = req.clinician;
